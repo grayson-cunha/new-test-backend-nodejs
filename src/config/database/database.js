@@ -8,6 +8,10 @@ class Database {
       console.log('Database connected');
     });
   }
+
+  async disconnect() {
+    return mongoose.disconnect();
+  }
 }
 
 export default new Database();

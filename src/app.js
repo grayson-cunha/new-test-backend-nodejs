@@ -1,6 +1,8 @@
 import express from 'express';
 import helmet from 'helmet';
 
+import appRoutes from './routes';
+
 class App {
   constructor() {
     this.server = express();
@@ -14,9 +16,7 @@ class App {
   }
 
   routes() {
-    this.server.get('/', (req, res) => {
-      res.send({ message: 'Hello World' });
-    });
+    this.server.use(appRoutes);
   }
 }
 
