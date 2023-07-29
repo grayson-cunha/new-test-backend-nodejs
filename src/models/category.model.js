@@ -7,6 +7,6 @@ const categorySchema = new Schema({
   ownerId: String,
 });
 
-const Category = mongoose.model('Dog', categorySchema);
+const Category = mongoose.model('Category', categorySchema);
 
 export default Category;

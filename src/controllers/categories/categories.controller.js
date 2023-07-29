@@ -45,7 +45,6 @@ class CategoriesController {
 
     const category = await Category.findOneAndDelete({ _id: id });
 
-    console.log(category);
     if (!category) {
       return res
         .status(HttpStatus.NOT_FOUND)
