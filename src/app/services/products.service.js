@@ -22,7 +22,9 @@ class ProductsService {
       ownerId,
     });
 
-    return newProduct.save();
+    const product = await newProduct.save();
+
+    return product;
   }
 
   async update(id, productData) {
