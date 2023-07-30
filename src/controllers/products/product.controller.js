@@ -1,25 +1,16 @@
-import mongoose from 'mongoose';
 import { HttpStatus } from '../../constants/http-constants';
-import Product from '../../models/product.model';
+import productsService from '../../services/products.service';
 
 class ProductsController {
   async create(req, res) {
     try {
-      const { title, description, price, category, ownerId } = req.body;
+      const product = { ...req.body };
 
-      const NewProduct = new Product({
-        title,
-        description,
-        price,
-        category: new mongoose.Types.ObjectId(category),
-        ownerId,
-      });
+      const newProduct = await productsService.create(product);
 
-      const product = await NewProduct.save();
-
-      return res.status(HttpStatus.CREATED).send(product);
+      return res.status(HttpStatus.CREATED).send(newProduct);
     } catch (err) {
-      res.status(HttpStatus.BAD_REQUEST).send({ message: err.message });
+      res.status(err.statusCode).send({ message: err.message });
     }
   }
 
@@ -29,36 +20,24 @@ class ProductsController {
 
       const productData = { ...req.body };
 
-      const updatedProduct = await Product.findOneAndUpdate(
-        { _id: id },
-        productData,
-        { new: true }
-      );
-
-      if (!updatedProduct) {
-        return res
-          .status(HttpStatus.NOT_FOUND)
-          .send({ message: `Product with id ${id} not found` });
-      }
+      const updatedProduct = await productsService.update(id, productData);
 
       return res.status(HttpStatus.OK).send(updatedProduct);
     } catch (err) {
-      return res.status(HttpStatus.BAD_REQUEST).send({ message: err.message });
+      return res.status(err.statusCode).send({ message: err.message });
     }
   }
 
   async delete(req, res) {
-    const id = req.params.id;
+    try {
+      const id = req.params.id;
 
-    const product = await Product.findOneAndDelete({ _id: id });
+      const deletedProduct = await productsService.delete(id);
 
-    if (!product) {
-      return res
-        .status(HttpStatus.NOT_FOUND)
-        .send({ message: `Product with id ${id} not found` });
+      return res.status(HttpStatus.OK).send(deletedProduct);
+    } catch (err) {
+      return res.status(err.statusCode).send({ message: err.message });
     }
-
-    return res.status(HttpStatus.OK).send(product);
   }
 }
 
