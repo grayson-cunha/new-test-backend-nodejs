@@ -1,17 +1,24 @@
-import mongoose from 'mongoose';
-
 import { AppError } from '../../utils/app-error';
 import { HttpStatus } from '../constants/http-constants';
 
 import Product from '../models/product.model';
+import Category from '../models/category.model';
 
 class ProductsService {
   async create({ title, description, price, category, ownerId }) {
+    const existsCategory = await Category.findOne({ _id: category, ownerId });
+
+    if (category && !existsCategory) {
+      throw new AppError(
+        `Doesn't exist category with id ${category} for the ownerId ${ownerId}`
+      );
+    }
+
     const newProduct = new Product({
       title,
       description,
       price,
-      category: new mongoose.Types.ObjectId(category),
+      category,
       ownerId,
     });
 

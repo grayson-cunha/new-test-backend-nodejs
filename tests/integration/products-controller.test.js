@@ -28,12 +28,12 @@ describe('product controller', () => {
   });
 
   it('should return status code 201 and the category object', async () => {
-    const NewCategory = Category({
+    const newCategory = Category({
       title: 'teste',
       description: 'teste',
-      ownerId: new mongoose.Types.ObjectId(),
+      ownerId,
     });
-    const savedCategory = await NewCategory.save();
+    const savedCategory = await newCategory.save();
 
     await supertest(app)
       .post('/products')
