@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
 
-import Product from '../models/product.model';
-import { HttpStatus } from '../constants/http-constants';
 import { AppError } from '../utils/app-error';
+import { HttpStatus } from '../constants/http-constants';
+
+import Product from '../models/product.model';
 
 class ProductsService {
   async create({ title, description, price, category, ownerId }) {
