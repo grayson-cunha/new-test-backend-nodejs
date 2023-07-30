@@ -1,11 +1,11 @@
 import supertest from 'supertest';
 import mongoose from 'mongoose';
 
-import app from '../../src/app';
+import app from '../../src/app/app';
 import Database from '../../src/config/database/database';
-import Category from '../../src/models/category.model';
-import { HttpStatus } from '../../src/constants/http-constants';
-import Product from '../../src/models/product.model';
+import Category from '../../src/app/models/category.model';
+import { HttpStatus } from '../../src/app/constants/http-constants';
+import Product from '../../src/app/models/product.model';
 
 describe('product controller', () => {
   let productMock;

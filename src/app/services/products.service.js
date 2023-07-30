@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import { AppError } from '../utils/app-error';
+import { AppError } from '../../utils/app-error';
 import { HttpStatus } from '../constants/http-constants';
 
 import Product from '../models/product.model';
