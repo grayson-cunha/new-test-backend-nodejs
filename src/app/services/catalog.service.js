@@ -9,16 +9,11 @@ class CatalogService {
         },
       },
       {
-        $project: {
-          _id: 0,
-          category_title: '$title',
-          category_description: '$description',
-          ownerId: 1,
-        },
-      },
-      {
         $lookup: {
           from: 'products',
+          localField: '_id',
+          foreignField: 'category',
+          as: 'itens',
           pipeline: [
             {
               $project: {
@@ -29,7 +24,15 @@ class CatalogService {
               },
             },
           ],
-          as: 'itens',
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          category_title: '$title',
+          category_description: '$description',
+          itens: 1,
+          ownerId: 1,
         },
       },
     ]);
