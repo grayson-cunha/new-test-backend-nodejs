@@ -1,5 +1,6 @@
 import express from 'express';
 import helmet from 'helmet';
+import compression from 'compression';
 
 import appRoutes from './routes';
 
@@ -13,6 +14,7 @@ class App {
   middlewares() {
     this.server.use(express.json());
     this.server.use(helmet());
+    this.server.use(compression());
   }
 
   routes() {

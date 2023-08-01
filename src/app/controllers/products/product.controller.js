@@ -11,10 +11,9 @@ class ProductsController {
 
       await sqsService.sendMessage({ ownerId: newProduct.ownerId });
 
-      // console.log('aasasasa');
       return res.status(HttpStatus.CREATED).send(newProduct);
     } catch (err) {
-      res.status(err.statusCode).send({ message: err.message });
+      res.status(err.statusCode || 500).send({ message: err.message });
     }
   }
 
