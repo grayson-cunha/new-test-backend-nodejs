@@ -1,6 +1,9 @@
 import supertest from 'supertest';
 import mongoose from 'mongoose';
 
+import AWSMock from 'aws-sdk-mock';
+import AWS from 'aws-sdk';
+
 import app from '../../src/app/app';
 import Database from '../../src/config/database/database';
 import Category from '../../src/app/models/category.model';
@@ -21,6 +24,11 @@ describe('product controller', () => {
       price: 12.99,
       ownerId,
     };
+
+    AWSMock.setSDKInstance(AWS);
+    AWSMock.mock('SQS', 'sendMessage', () => {
+      return;
+    });
   });
 
   afterAll(async () => {

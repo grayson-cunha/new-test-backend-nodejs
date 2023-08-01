@@ -1,6 +1,9 @@
 import supertest from 'supertest';
 import mongoose from 'mongoose';
 
+import AWSMock from 'aws-sdk-mock';
+import AWS from 'aws-sdk';
+
 import app from '../../src/app/app';
 import Database from '../../src/config/database/database';
 import Category from '../../src/app/models/category.model';
@@ -19,6 +22,11 @@ describe('category controller', () => {
       description: 'Items de higiene pessoal, pasta de dente, sabonete e etc',
       ownerId,
     };
+
+    AWSMock.setSDKInstance(AWS);
+    AWSMock.mock('SQS', 'sendMessage', () => {
+      return;
+    });
   });
 
   afterAll(async () => {
