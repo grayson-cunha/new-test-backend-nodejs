@@ -2,6 +2,8 @@
 
 REST API to manage catalog of products.
 
+There is a insomnia json file on the root directory for import the requests to use insomnia.
+
 ## How to start?
 
 1. `docker run --name mongo -p 27017:27017 -d mongo`
