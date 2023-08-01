@@ -12,7 +12,9 @@
   "author": "Grayson Cunha",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.379.1",
     "@aws-sdk/client-sqs": "^3.379.1",
+    "@aws-sdk/lib-storage": "^3.379.1",
     "aws-sdk": "^2.1425.0",
     "body-parser": "^1.20.2",
     "compression": "^1.7.4",
