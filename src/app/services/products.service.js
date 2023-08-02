@@ -10,6 +10,7 @@ class ProductsService {
 
     if (category && !existsCategory) {
       throw new AppError(
+        HttpStatus.BAD_REQUEST,
         `Doesn't exist category with id ${category} for the ownerId ${ownerId}`
       );
     }

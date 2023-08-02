@@ -11,6 +11,8 @@ There is a insomnia json file on the root directory for import the requests to u
 1. Change the values on .env with real values
 1. `npm run start:dev`
 
+**On app running you can access swagger documentation on localhost:${PORT}/documentation**
+
 ## How to run tests?
 
 - `npm run test`
